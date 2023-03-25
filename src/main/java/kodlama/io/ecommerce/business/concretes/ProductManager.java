@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class ProductManager implements ProductService {
-    private final ProductRepository repository; //oto InMemoryProductRepository oluşturur (birbirine bağlı olduğu için)
+    private final ProductRepository repository;
 
     @Override
     public List<Product> getAll() {
