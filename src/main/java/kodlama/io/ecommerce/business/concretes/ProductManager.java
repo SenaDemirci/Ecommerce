@@ -1,45 +1,44 @@
 package kodlama.io.ecommerce.business.concretes;
 
 import kodlama.io.ecommerce.business.abstracts.ProductService;
-import kodlama.io.ecommerce.entities.concretes.Product;
-import kodlama.io.ecommerce.repository.abstracts.ProductRepository;
+import kodlama.io.ecommerce.entities.Product;
+import kodlama.io.ecommerce.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 //Servisten repoya ulaşmalıyız.
+@AllArgsConstructor
 @Service
 public class ProductManager implements ProductService {
     private final ProductRepository repository; //oto InMemoryProductRepository oluşturur (birbirine bağlı olduğu için)
 
-    public ProductManager(ProductRepository repository) {
-        this.repository = repository;
-    }
-
     @Override
     public List<Product> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @Override
     public Product getById(int id) {
-        return repository.getById(id);
+        return repository.findById(id).orElseThrow();
     }
 
     @Override
     public Product add(Product product) {
         validateProduct(product);
-        return repository.add(product);
+        return repository.save(product);
     }
 
     @Override
     public Product update(int id, Product product) {
         validateProduct(product);
-        return repository.update(id, product);
+        product.setId(id);
+        return repository.save(product);
     }
 
     @Override
     public void delete(int id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
     //ctrl + w (bütün bloğu açar)
