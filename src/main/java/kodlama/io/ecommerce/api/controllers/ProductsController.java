@@ -44,7 +44,7 @@ public class ProductsController {
         return service.update(id, product);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT) //HttpStatus hazır olan enumlar
+    @ResponseStatus(HttpStatus.NO_CONTENT) //HttpStatus hazır olan enum
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
         service.delete(id);
